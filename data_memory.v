@@ -1,22 +1,29 @@
-module data_memory(address , MemRead ,MemWrite, clk , rst , data_out , data_write);
+module data_memory(
+    input clk,
+    input rst,
+    input MemWrite,
+    input MemRead,
+    input [31:0] data_write,
+    input [31:0] address,
+    output [31:0] data_out
+);
 
-input clk , rst , MemWrite ,MemRead ;
-input [31:0] data_write , address;
-output [31:0] data_out ;
-integer i ;
-reg [31:0] DM [0:63] ;
+reg [31:0] DM [0:63];
+integer i;
 
-always@(posedge clk) begin
+wire [5:0] word_address;
+assign word_address = address[7:2];
 
-    if(rst) begin
-       for(i=0 ; i<63 ; i++) begin
-            DM[i] <= 32'b0 ;
-       end
+always @(posedge clk) begin
+    if (rst) begin
+        for(i=0; i<64; i=i+1)
+            DM[i] <= 32'b0;
     end
-    else if(MemWrite)
-        DM[address] <= data_write ;
+    else if (MemWrite) begin
+        DM[word_address] <= data_write;
+    end
 end
 
-assign data_out = MemRead ? DM[address] : 32'b0 ;
+assign data_out = MemRead ? DM[word_address] : 32'b0;
 
-endmodule 
+endmodule
