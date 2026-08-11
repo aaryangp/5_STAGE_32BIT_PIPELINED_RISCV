@@ -35,6 +35,16 @@ always@(*) begin
             Branch = 1'b0 ;
             ALUOp = 2'b00 ; // ALU performs ADD for address calculation
         end
+
+         7'b0010011 : begin   // I-TYPE ALU INSTRUCTIONS
+          ALUSrc   = 1'b1;
+          MemtoReg = 1'b0;
+          RegWrite = 1'b1;
+          MemRead  = 1'b0;
+          MemWrite = 1'b0;
+          Branch   = 1'b0;
+          ALUOp    = 2'b10;
+            end
         
         7'b0100011 : begin   // STORE (S-TYPE) INSTRUCTIONS
             ALUSrc = 1'b1 ; 
