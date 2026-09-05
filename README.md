@@ -2,6 +2,8 @@
 
 A 5-stage pipelined RISC-V (RV32I) CPU implemented in Verilog, built up incrementally from a verified single-cycle design: full classic pipeline (IF/ID/EX/MEM/WB), EX-stage data forwarding, load-use hazard stalling, static branch prediction with misprediction recovery, and unconditional jumps (JAL/JALR). Every stage of this was implemented and then verified against Icarus Verilog (`iverilog`/`vvp`) simulation traces before moving on to the next.
 
+[View the interactive version →]([https://claude.ai/code/artifact/64c820fa-0fbb-416c-b3ac-fe3e7a324c95])
+
 ## Status
 
 | Feature | Status |
